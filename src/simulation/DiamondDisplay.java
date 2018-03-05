@@ -11,9 +11,9 @@ import physics.*;
 //Feb 27, 2018
 //IHRTLUHC 
 
-public class Diamond 
+public class DiamondDisplay
 {
-    private ArrayList<LineSegment> walls;
+
     private Polygon diamond;
     public int x;
     public int y;
@@ -21,7 +21,7 @@ public class Diamond
     Point top, bottom, left, right;
     
     
-    public Diamond(int x, int y, int r) {
+    public DiamondDisplay(int x, int y, int r) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -30,14 +30,6 @@ public class Diamond
         left = new Point(x, y+r);
         bottom = new Point(x+r, y+(2*r));
         
-
-        
-        walls = new ArrayList<LineSegment>();
-
-        walls.add(new LineSegment(top, left));
-        walls.add(new LineSegment(left, bottom));
-        walls.add(new LineSegment(bottom, right));
-        walls.add(new LineSegment(right, top));
     }
     
     
@@ -60,36 +52,6 @@ public class Diamond
         this.y = newY;
     }
     
-    public Ray bounceRay(Ray in,double time)
-    {
-        // For each of the walls, check to see if the Ray intersects the wall
-        Point intersection = null;
-        for(int n = 0;n < walls.size();n++)
-        {
-            LineSegment seg = in.toSegment(time);
-            intersection = walls.get(n).intersection(seg);
-            if(intersection != null)
-            {
-                // If it intersects, find out when
-                double t = in.getTime(intersection);
-                // Reflect the Ray off the line segment
-                Ray newRay = walls.get(n).reflect(seg,in.speed);
-                // Figure out where we end up after the reflection.
-                Point dest = newRay.endPoint(time-t);
-                return new Ray(dest,newRay.v,in.speed);
-            }
-        }
-        return null;
-    }
-    
-    public void move(int deltaX,int deltaY)
-    {
-        for(int n = 0;n < walls.size();n++)
-            walls.get(n).move(deltaX,deltaY);
-        x += deltaX;
-        y += deltaY;
-    }
-    
     public boolean contains(Point p)
     {
 //        if(((p.x + p.y) > (this.x + this.y + r)) && ((p.x + p.y) < (this.x + this.y + (3*r))) && (p.x>this.x) && (p.x<(this.x + (2*r)))) {
@@ -106,12 +68,12 @@ public class Diamond
         return diamond;
     }
     
-    public void updateShape(GameGateway gateway, Boolean opponent)
+    public void updateShape(ArrayList<Point> points)
     {
-        this.top = walls.get(0).a;
-        this.left = walls.get(1).a;
-        this.bottom = walls.get(2).a;
-        this.right = walls.get(3).a;
+        this.top = points.get(0);
+        this.left = points.get(1);
+        this.bottom = points.get(2);
+        this.right = points.get(3);
         
         diamond.getPoints().clear();
         

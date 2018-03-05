@@ -11,8 +11,8 @@ import physics.*;
 public class Simulation {
     private Box outer;
     private Ball ball;
-    private Box player1;
-    private Box player2;
+    private DiamondDisplay player1;
+    private DiamondDisplay player2;
     private Lock lock;
     private GameGateway gateway;
     
@@ -21,8 +21,8 @@ public class Simulation {
         gateway = new GameGateway();
         outer = new Box(0,0,width,height,false);
         ball = new Ball(width/2,height/2,dX,dY);
-        player1 = new Box(width - 60,height - 40, 40, 20,true);
-        player2 = new Box(60, 40, 20, 20, true);
+        player1 = new DiamondDisplay(width - 60,height - 40, 20);
+        player2 = new DiamondDisplay(60, 40, 20);
         lock = new ReentrantLock();
     }
     
@@ -61,8 +61,10 @@ public class Simulation {
     
     public void updateShapes()
     {
-        player2.updateShape(gateway, true);
-        player1.updateShape(gateway, false);
+        ArrayList<Point> points;
+        //getPoints
+        player2.updateShape(points);
+        player1.updateShape(points);
         ball.updateShape();
     }
 }
