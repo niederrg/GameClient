@@ -63,6 +63,7 @@ public class Simulation {
     {
         ArrayList<Point> points;
         //getPoints
+        points = gateway.getPoints();
         player2.updateShape(points);
         player1.updateShape(points);
         ball.updateShape();

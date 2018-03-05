@@ -106,7 +106,7 @@ public class Diamond
         return diamond;
     }
     
-    public void updateShape(GameGateway gateway, Boolean opponent)
+    public void updateShape( Boolean opponent)
     {
         this.top = walls.get(0).a;
         this.left = walls.get(1).a;
