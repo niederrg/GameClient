@@ -21,13 +21,29 @@ import javafx.scene.shape.Rectangle;
 public class FXMLLobbyController implements Initializable {
 
     @FXML
-    Label lobbyLabel, player1, player2;
+    private Label lobbyLabel; 
+    @FXML
+    private Label player1;
+    @FXML
+    private Label player2;
+    @FXML
+    private Label player1Name;
+    @FXML
+    private Label player2Name;
     
     @FXML
-    Rectangle player1Color, player2Color;
+    private Rectangle player1Color;
+    @FXML
+    private Rectangle player2Color;
     
     @FXML
-    Button player1Ready, player2Ready;
+    private Button player1Ready;
+    @FXML
+    private Button player2Ready;
+       
+    
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
