@@ -61,11 +61,13 @@ public class Simulation {
     
     public void updateShapes()
     {
-        ArrayList<Point> points;
+        ArrayList<Point> pointsP1;
+        ArrayList<Point> pointsP2;
         //getPoints
-        points = gateway.getPoints();
-        player2.updateShape(points);
-        player1.updateShape(points);
+        pointsP1 = gateway.getPoints(false);
+        pointsP2 = gateway.getPoints(true);
+        player2.updateShape(pointsP2);
+        player1.updateShape(pointsP1);
         ball.updateShape();
     }
 }

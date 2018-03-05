@@ -36,12 +36,12 @@ public class GameGateway implements game.GameConstants {
         outputToServer.flush();
     }
     
-    public ArrayList<Point> getPoints(){
+    public ArrayList<Point> getPoints(boolean opponent){
         outputToServer.println(GET_POINTS);
+        outputToServer.println(opponent);
         ArrayList<Point> points = new ArrayList<>();
         try{
-            int num = Integer.parseInt(inputFromServer.readLine());
-            for (int i=0; i<num; i++){
+            for (int i=0; i<4; i++){
                 double x = Double.parseDouble(inputFromServer.readLine());
                 double y = Double.parseDouble(inputFromServer.readLine());
                 points.add(new Point(x,y));
