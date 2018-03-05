@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import javafx.application.Platform;
-import javafx.scene.control.TextArea;
+import java.util.ArrayList;
+import physics.Point;
 
 public class GameGateway implements game.GameConstants {
     private PrintWriter outputToServer;
@@ -34,6 +34,21 @@ public class GameGateway implements game.GameConstants {
         outputToServer.println(dX);
         outputToServer.println(dY);
         outputToServer.flush();
+    }
+    
+    public ArrayList<Point> getPoints(){
+        outputToServer.println(GET_POINTS);
+        ArrayList<Point> points = new ArrayList<>();
+        try{
+            int num = Integer.parseInt(inputFromServer.readLine());
+            for (int i=0; i<num; i++){
+                double x = Double.parseDouble(inputFromServer.readLine());
+                double y = Double.parseDouble(inputFromServer.readLine());
+                points.add(new Point(x,y));
+            }
+        } catch(Exception ex) {}
+        
+        return points;
     }
     
     public int getX(boolean opponent){
