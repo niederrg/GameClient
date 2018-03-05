@@ -1,9 +1,13 @@
 
 package gameclient;
 
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import simulation.Simulation;
 
@@ -11,7 +15,31 @@ public class GameClient extends Application {
 
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception{
+        
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Start Chat");
+        dialog.setHeaderText(null); 
+        dialog.setContentText("Enter a handle:");
+        Optional<String> result = dialog.showAndWait();
+        FXMLLobbyController controller = new FXMLLobbyController();
+        //result.ifPresent(name -> controller.setName(name));
+        String name = result.get();
+       
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLLobby.fxml"));
+        
+        GameGateway gateway = new GameGateway();
+        
+        Scene scene = new Scene(root);
+        
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Game Lobby");
+        primaryStage.setOnCloseRequest(event->System.exit(0));
+        primaryStage.show();
+        controller.setName(name, gateway.getClientNumber());
+    }
+
+    public void startGame(Stage primaryStage){
         GamePane root = new GamePane();
         Simulation sim = new Simulation(300, 250, 2, 2);
         root.setShapes(sim.setUpShapes());
@@ -39,10 +67,10 @@ public class GameClient extends Application {
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest((event)->System.exit(0));
         primaryStage.show();
-
         
         new Thread(new CheckPositions(sim));
         // This is the main animation thread
+        
         new Thread(() -> {
             while (true) {
                 sim.evolve(1.0);
@@ -55,10 +83,9 @@ public class GameClient extends Application {
             }
         }).start();
     }
-
     
     public static void main(String[] args) {
-        // TODO code application logic here
+        launch(args);// TODO code application logic here
     }
     
 }

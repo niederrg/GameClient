@@ -84,4 +84,13 @@ public class GameGateway implements game.GameConstants {
         }
         return Y;
     }
+     
+    public int getClientNumber(){
+        outputToServer.println(GET_CLIENT_NUM);
+        outputToServer.flush();
+        try {
+            return Integer.parseInt(inputFromServer.readLine());
+        } catch (Exception ex) {}
+        return 0;
+    }
 }

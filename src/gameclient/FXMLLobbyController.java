@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simulation;
+package gameclient;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -53,8 +54,14 @@ public class FXMLLobbyController implements Initializable {
     public void setName(String name, int i) {
         if(i==1) {
             player1Name.setText(name);
+            player1Color.setFill(Color.BLUE);
         } else if(i==2) {
             player2Name.setText(name);
+            player2Color.setFill(Color.RED);
         }
+    }
+    
+    private void startGame(){
+        
     }
 }
