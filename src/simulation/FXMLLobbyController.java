@@ -40,7 +40,7 @@ public class FXMLLobbyController implements Initializable {
     private Button player1Ready;
     @FXML
     private Button player2Ready;
-       
+    
     
     
     
@@ -50,4 +50,11 @@ public class FXMLLobbyController implements Initializable {
         // TODO
     }    
     
+    public void setName(String name, int i) {
+        if(i==1) {
+            player1Name.setText(name);
+        } else if(i==2) {
+            player2Name.setText(name);
+        }
+    }
 }
