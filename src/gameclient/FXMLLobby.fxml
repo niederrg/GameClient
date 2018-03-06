@@ -25,16 +25,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="player1Name" alignment="CENTER" layoutX="118.0" layoutY="145.0" text="[No Player]" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="145.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="player2Name" alignment="CENTER" layoutX="128.0" layoutY="155.0" text="[No Player]" textAlignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="145.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <Button fx:id="player1Ready" layoutX="114.0" layoutY="346.0" mnemonicParsing="false" text="Ready" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="400.0">
          <font>
             <Font size="18.0" />
