@@ -78,6 +78,7 @@ public class GameClient extends Application {
         primaryStage.show();
         
         new Thread(new CheckPositions(sim));
+        new Thread(new CheckScore(sim));
         // This is the main animation thread
         
         new Thread(() -> {
@@ -97,6 +98,29 @@ public class GameClient extends Application {
         launch(args);// TODO code application logic here
     }
     
+}
+
+class CheckScore implements Runnable {
+    private int p1score;
+    private int p2score;
+    private GameGateway gateway;
+    
+    public CheckScore(Simulation sim){
+        p1score = 0;
+        p2score = 0;
+        gateway = sim.getGateway();
+    }
+    
+    public void run(){
+        while(true){
+            p1score = gateway.getScore(1);
+            p2score = gateway.getScore(2);
+            //SEND THESE NUMBERS TO WHEREVER WE ARE SHOWING THEM SOMEHOW HERE!
+            try {
+                Thread.sleep(250);
+            } catch (Exception ex) {}
+        }
+    }
 }
 
 class CheckPositions implements Runnable,game.GameConstants{

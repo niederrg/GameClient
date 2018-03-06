@@ -114,4 +114,19 @@ public class GameGateway implements game.GameConstants {
         } catch (Exception ex) {}
         return 0;
     }
+    
+    public void sendScore(){
+        outputToServer.println(SEND_SCORE);
+        outputToServer.flush();
+    }
+    
+    public int getScore(int playerNum){
+        outputToServer.println(GET_SCORE);
+        outputToServer.println(playerNum);
+        outputToServer.flush();
+        try{
+            return Integer.parseInt(inputFromServer.readLine());
+        }catch (Exception ex) {}
+        return 0;
+    }
 }

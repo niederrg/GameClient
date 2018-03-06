@@ -26,6 +26,8 @@ public class Simulation {
         lock = new ReentrantLock();
     }
     
+    public GameGateway getGateway(){ return gateway; }
+    
     public void evolve(double time)
     {
         gateway.evolve(time);
