@@ -122,4 +122,10 @@ public class GameGateway implements game.GameConstants {
         }catch (Exception ex) {}
         return 0;
     }
+    
+    public void endGame(int winner){
+        outputToServer.println(END_GAME);
+        outputToServer.println(winner);
+        outputToServer.flush();
+    }
 }

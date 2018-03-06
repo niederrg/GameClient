@@ -123,6 +123,12 @@ class CheckScore implements Runnable {
         while(true){
             p1score = gateway.getScore(1);
             p2score = gateway.getScore(2);
+            
+            if (p1score >=10){
+                gateway.endGame(1); //PUT OTHER END GAME CODE HERE
+            } else if (p2score >= 10){
+                gateway.endGame(2); // PUT OTHER END GAME CODE HERE
+            } 
             //SEND THESE NUMBERS TO WHEREVER WE ARE SHOWING THEM SOMEHOW HERE!
             try {
                 Thread.sleep(250);
