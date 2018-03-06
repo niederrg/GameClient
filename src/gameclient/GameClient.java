@@ -38,14 +38,15 @@ public class GameClient extends Application {
         primaryStage.show();
         FXMLLobbyController controller = (FXMLLobbyController) loader.getController();
         controller.setPlayerNumber(playerNumber);
+        controller.hideReady(playerNumber);
         
         new Thread(() -> {
             while(gameStarted != true) {
-                Boolean ready = false;
+                int ready = 0;
                 try {
-                    Boolean newReady = gateway.getReady();
+                    int newReady = gateway.getReady();
                     if(newReady != ready) {
-                        if(newReady = true) {
+                        if(newReady == 1) {
                             controller.setReady(playerNumber);
                         } else { controller.setNotReady(playerNumber); }
                     }

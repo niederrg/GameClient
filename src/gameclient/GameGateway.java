@@ -65,21 +65,21 @@ public class GameGateway implements game.GameConstants {
         return X;
     }
     
-    public void sendReady(Boolean b) {
+    public void sendReady(int b) {
         outputToServer.println(SEND_READY);
         outputToServer.println(b);
         outputToServer.flush();
     }
     
-    public Boolean getReady() {
+    public int getReady() {
         outputToServer.println(GET_READY);
         
-        Boolean ready = false;
+        int ready = 0;
         try {
             String status = inputFromServer.readLine();
             if(status.equals("true")) {
-                ready = true;
-            } else { ready = false; }
+                ready = 1;
+            }
         } catch (Exception ex) {ex.printStackTrace(); }
         return ready;
     }

@@ -39,22 +39,32 @@ public class FXMLLobbyController implements Initializable {
     private Button player2Ready;
     
     
-    private Boolean p1Ready = false;
-    private Boolean p2Ready = false;
+    private int p1Ready = 0;
+    private int p2Ready = 0;
     private int playerNumber;
     
     public void setPlayerNumber(int i) {
         playerNumber = i;
     }
     
+    
+    
+    public void hideReady(int i) {
+        if(i == 1) {
+            player2Ready.setVisible(false);
+        } else {
+            player1Ready.setVisible(false);
+        }
+    }
+    
     @FXML
     private void setP1Ready() {
-        if(p1Ready) {
-            p1Ready = false;
+        if(p1Ready == 1) {
+            p1Ready = 0;
             player1Ready.setText("Ready");
             player1Color.setFill(Color.WHITE);
         } else {
-            p1Ready = true;
+            p1Ready = 1;
             player1Ready.setText("Unready");
             player1Color.setFill(Color.BLUE);
         }  
@@ -65,12 +75,12 @@ public class FXMLLobbyController implements Initializable {
     
     @FXML
     private void setP2Ready() {
-        if(p2Ready) {
-            p2Ready = false;
+        if(p2Ready == 1) {
+            p2Ready = 0;
             player2Ready.setText("Ready");
             player2Color.setFill(Color.WHITE);
         } else {
-            p2Ready = true;
+            p2Ready = 1;
             player2Ready.setText("Unready");
             player2Color.setFill(Color.RED);
         }
@@ -81,11 +91,11 @@ public class FXMLLobbyController implements Initializable {
     
     public void setNotReady(int playerNumber) {
         if(playerNumber == 1) {
-            p1Ready = false;
+            p1Ready = 0;
             player1Ready.setText("Ready");
             player1Color.setFill(Color.WHITE);
         } else {
-            p2Ready = false;
+            p2Ready = 0;
             player2Ready.setText("Ready");
             player2Color.setFill(Color.WHITE);
         }
@@ -93,11 +103,11 @@ public class FXMLLobbyController implements Initializable {
     
     public void setReady(int playerNumber) {
         if(playerNumber == 1) {
-            p1Ready = true;
+            p1Ready = 1;
             player1Ready.setText("Unready");
             player1Color.setFill(Color.BLUE);
         } else {
-            p2Ready = true;
+            p2Ready = 1;
             player2Ready.setText("Unready");
             player2Color.setFill(Color.RED);
         }
