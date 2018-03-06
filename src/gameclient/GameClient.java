@@ -12,23 +12,20 @@ import javafx.stage.Stage;
 import simulation.Simulation;
 
 public class GameClient extends Application {
-    private String playerName;
-    public static String opponentName;
+    private int playerNumber;
+    private int opponentNumber;
+    public static GameGateway gateway;
+    private static boolean gameStarted = false;
     
     @Override
     public void start(Stage primaryStage) throws Exception{
         
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Start Chat");
-        dialog.setHeaderText(null); 
-        dialog.setContentText("Enter a handle:");
-        Optional<String> result = dialog.showAndWait();
+        gateway = new GameGateway();
         
-        playerName = "Player 1";
-        playerName = result.get();
-        
-        GameGateway gateway = new GameGateway();
-        gateway.sendName(playerName);
+        playerNumber = gateway.getClientNumber();
+        if(playerNumber == 1) {
+            opponentNumber = 2;
+        }
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLobby.fxml"));
         Parent root = (Parent)loader.load();
@@ -40,14 +37,25 @@ public class GameClient extends Application {
         primaryStage.setOnCloseRequest(event->System.exit(0));
         primaryStage.show();
         FXMLLobbyController controller = (FXMLLobbyController) loader.getController();
-        controller.setName(playerName, gateway.getClientNumber());
+        controller.setPlayerNumber(playerNumber);
         
+        new Thread(() -> {
+            while(gameStarted != true) {
+                Boolean ready = false;
+                try {
+                    Boolean newReady = gateway.getReady();
+                    if(newReady != ready) {
+                        if(newReady = true) {
+                            controller.setReady(playerNumber);
+                        } else { controller.setNotReady(playerNumber); }
+                    }
+                    ready = newReady;
+                } catch(Exception ex) {ex.printStackTrace(); }
+            }
+        }).start();
     }
+     
     
-    private void setName(String name) {
-        this.playerName = name;
-    }
-
     public void startGame(Stage primaryStage){
         GamePane root = new GamePane();
         Simulation sim = new Simulation(300, 250, 2, 2);
@@ -140,22 +148,4 @@ class CheckPositions implements Runnable,game.GameConstants{
     }
 }
 
-class LookForOpponent implements Runnable, game.GameConstants {
-    GameGateway gateway;
-    
-    public LookForOpponent(GameGateway gateway) {
-        this.gateway = gateway;
-    }
-    
-    public void run() {
-        while(GameClient.opponentName.isEmpty()) {
-            try {
-                String name = gateway.getName(); 
-                if(name.isEmpty() == false) {
-                    GameClient.opponentName = gateway.getName();
-                }
-                Thread.sleep(250);
-            } catch (Exception ex) {}
-        }
-    }
-}
+
