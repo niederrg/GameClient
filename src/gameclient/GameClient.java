@@ -13,6 +13,7 @@ import simulation.Simulation;
 
 public class GameClient extends Application {
     private String playerName;
+    public static String opponentName;
     
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -23,13 +24,15 @@ public class GameClient extends Application {
         dialog.setContentText("Enter a handle:");
         Optional<String> result = dialog.showAndWait();
         
-        String playerName = "Player 1";
-        result.ifPresent(name -> setName(name));
-        //String name = result.get();
+        playerName = "Player 1";
+        playerName = result.get();
+        
+        GameGateway gateway = new GameGateway();
+        gateway.sendName(playerName);
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLobby.fxml"));
         Parent root = (Parent)loader.load();
-        GameGateway gateway = new GameGateway();
+        
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
@@ -38,6 +41,7 @@ public class GameClient extends Application {
         primaryStage.show();
         FXMLLobbyController controller = (FXMLLobbyController) loader.getController();
         controller.setName(playerName, gateway.getClientNumber());
+        
     }
     
     private void setName(String name) {
@@ -97,11 +101,9 @@ public class GameClient extends Application {
 
 class CheckPositions implements Runnable,game.GameConstants{
     private Simulation sim;
-    private GameGateway gateway;
     
     public CheckPositions(Simulation sim){
         this.sim=sim;
-        gateway = new GameGateway();
     }
     
     public void run(){
@@ -110,6 +112,26 @@ class CheckPositions implements Runnable,game.GameConstants{
             try{
                 Thread.sleep(250);
             }catch (Exception ex) {}
+        }
+    }
+}
+
+class LookForOpponent implements Runnable, game.GameConstants {
+    GameGateway gateway;
+    
+    public LookForOpponent(GameGateway gateway) {
+        this.gateway = gateway;
+    }
+    
+    public void run() {
+        while(GameClient.opponentName.isEmpty()) {
+            try {
+                String name = gateway.getName(); 
+                if(name.isEmpty() == false) {
+                    GameClient.opponentName = gateway.getName();
+                }
+                Thread.sleep(250);
+            } catch (Exception ex) {}
         }
     }
 }
