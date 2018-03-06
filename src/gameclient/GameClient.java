@@ -48,18 +48,28 @@ public class GameClient extends Application {
             int ready = 0;
             while(true) {
                 
+//                try {
+//                    int newReady = gateway.getReady();                    
+//                    //if the opponent ready status is not what it was...
+//                    if(newReady != ready) {
+//                        System.out.println("Different");
+//                        //if they're newly ready...
+//                        if(newReady == 1) {
+//                            controller.setReady(opponentNumber);
+//                        } else { controller.setNotReady(opponentNumber); }
+//                    }
+//                    ready = newReady;
+//                } catch(Exception ex) {ex.printStackTrace(); }
+
                 try {
-                    int newReady = gateway.getReady();                    
-                    //if the opponent ready status is not what it was...
-                    if(newReady != ready) {
-                        System.out.println("Different");
-                        //if they're newly ready...
-                        if(newReady == 1) {
-                            controller.setReady(opponentNumber);
-                        } else { controller.setNotReady(opponentNumber); }
+                    int opponentReady = 0;
+                    while(opponentReady == 0) {
+                        opponentReady = gateway.getReady();
+                        
+                        Thread.sleep(250);
                     }
-                    ready = newReady;
-                } catch(Exception ex) {ex.printStackTrace(); }
+                    controller.setReady(opponentNumber);
+                } catch (Exception ex) { ex.printStackTrace(); }
             }
         }).start();
     }

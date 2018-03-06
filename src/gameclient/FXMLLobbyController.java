@@ -59,45 +59,50 @@ public class FXMLLobbyController implements Initializable {
     
     @FXML
     private void setP1Ready() {
-        if(p1Ready == 1) {
-            p1Ready = 0;
-            player1Ready.setText("Ready");
-            player1Color.setFill(Color.WHITE);
-        } else {
+        if(p1Ready == 0) {
+//        if(p1Ready == 1) {
+//            p1Ready = 0;
+//            player1Ready.setText("Ready");
+//            player1Color.setFill(Color.WHITE);
+//        } else {
             p1Ready = 1;
-            player1Ready.setText("Unready");
+//            player1Ready.setText("Unready");
             player1Color.setFill(Color.BLUE);
-        }  
-        if(playerNumber == 1) {
-            GameClient.gateway.sendReady(p1Ready);
+//        }  
+            if(playerNumber == 1) {
+                GameClient.gateway.sendReady(p1Ready);
+            }
         }
     }
     
     @FXML
     private void setP2Ready() {
-        if(p2Ready == 1) {
-            p2Ready = 0;
-            player2Ready.setText("Ready");
-            player2Color.setFill(Color.WHITE);
-        } else {
+        if(p2Ready == 0) {
+
+//        if(p2Ready == 1) {
+//            p2Ready = 0;
+//            player2Ready.setText("Ready");
+//            player2Color.setFill(Color.WHITE);
+//        } else {
             p2Ready = 1;
-            player2Ready.setText("Unready");
+//            player2Ready.setText("Unready");
             player2Color.setFill(Color.RED);
-        }
-        if(playerNumber == 2) {
-            GameClient.gateway.sendReady(p2Ready);
+//        }
+            if(playerNumber == 2) {
+                GameClient.gateway.sendReady(p2Ready);
+            }
         }
     }
     
-    public void setNotReady(int playerNumber) {
-        if(playerNumber == 1) {
-            p1Ready = 0;
-            player1Color.setFill(Color.WHITE);
-        } else {
-            p2Ready = 0;
-            player2Color.setFill(Color.WHITE);
-        }
-    }
+//    public void setNotReady(int playerNumber) {
+//        if(playerNumber == 1) {
+//            p1Ready = 0;
+//            player1Color.setFill(Color.WHITE);
+//        } else {
+//            p2Ready = 0;
+//            player2Color.setFill(Color.WHITE);
+//        }
+//    }
     
     public void setReady(int playerNumber) {
         if(playerNumber == 1) {
