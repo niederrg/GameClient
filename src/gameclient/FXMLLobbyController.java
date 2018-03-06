@@ -83,9 +83,10 @@ public class FXMLLobbyController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+            // TODO
     }    
     
+    @FXML
     public void setName(String name, int i) {
         if(i==1) {
             player1Name.setText(name);
