@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import simulation.Simulation;
 
 public class GameClient extends Application {
-
+    private String playerName;
     
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -22,21 +22,25 @@ public class GameClient extends Application {
         dialog.setHeaderText(null); 
         dialog.setContentText("Enter a handle:");
         Optional<String> result = dialog.showAndWait();
+        
+        String playerName = "Player 1";
+        result.ifPresent(name -> setName(name));
+        //String name = result.get();
+        
         FXMLLobbyController controller = new FXMLLobbyController();
-        //result.ifPresent(name -> controller.setName(name));
-        String name = result.get();
-       
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLobby.fxml"));
-        
         GameGateway gateway = new GameGateway();
-        
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
         primaryStage.setTitle("Game Lobby");
         primaryStage.setOnCloseRequest(event->System.exit(0));
         primaryStage.show();
-        controller.setName(name, gateway.getClientNumber());
+        controller.setName(playerName, gateway.getClientNumber());
+    }
+    
+    private void setName(String name) {
+        this.playerName = name;
     }
 
     public void startGame(Stage primaryStage){
