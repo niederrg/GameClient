@@ -28,7 +28,7 @@ public class FXMLLobbyController implements Initializable {
     @FXML
     private Label player2;
     @FXML
-    private Label player1Name;
+    Label player1Name;
     @FXML
     private Label player2Name;
     
@@ -83,7 +83,7 @@ public class FXMLLobbyController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            // TODO
+            //TODO
     }    
     
     @FXML

@@ -27,8 +27,8 @@ public class GameClient extends Application {
         result.ifPresent(name -> setName(name));
         //String name = result.get();
         
-        FXMLLobbyController controller = new FXMLLobbyController();
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLLobby.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLobby.fxml"));
+        Parent root = (Parent)loader.load();
         GameGateway gateway = new GameGateway();
         Scene scene = new Scene(root);
         
@@ -36,6 +36,7 @@ public class GameClient extends Application {
         primaryStage.setTitle("Game Lobby");
         primaryStage.setOnCloseRequest(event->System.exit(0));
         primaryStage.show();
+        FXMLLobbyController controller = (FXMLLobbyController) loader.getController();
         controller.setName(playerName, gateway.getClientNumber());
     }
     
