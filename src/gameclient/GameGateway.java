@@ -39,6 +39,7 @@ public class GameGateway implements game.GameConstants {
     public ArrayList<Point> getPoints(boolean opponent){
         outputToServer.println(GET_POINTS);
         outputToServer.println(opponent);
+        outputToServer.flush();
         ArrayList<Point> points = new ArrayList<>();
         try{
             for (int i=0; i<4; i++){
@@ -73,13 +74,12 @@ public class GameGateway implements game.GameConstants {
     
     public int getReady() {
         outputToServer.println(GET_READY);
+        outputToServer.flush();
         
         int ready = 0;
         try {
-            String status = inputFromServer.readLine();
-            if(status.equals("true")) {
-                ready = 1;
-            }
+            ready = Integer.parseInt(inputFromServer.readLine());
+            
         } catch (Exception ex) {ex.printStackTrace(); }
         return ready;
     }

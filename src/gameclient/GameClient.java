@@ -25,6 +25,8 @@ public class GameClient extends Application {
         playerNumber = gateway.getClientNumber();
         if(playerNumber == 1) {
             opponentNumber = 2;
+        } else {
+            opponentNumber = 1;
         }
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLobby.fxml"));
@@ -40,15 +42,21 @@ public class GameClient extends Application {
         controller.setPlayerNumber(playerNumber);
         controller.hideReady(playerNumber);
         
+        
+        System.out.println("My number is: " + playerNumber + "\nMy opponent's number is: " + opponentNumber);
         new Thread(() -> {
-            while(gameStarted != true) {
-                int ready = 0;
+            int ready = 0;
+            while(true) {
+                
                 try {
-                    int newReady = gateway.getReady();
+                    int newReady = gateway.getReady();                    
+                    //if the opponent ready status is not what it was...
                     if(newReady != ready) {
+                        System.out.println("Different");
+                        //if they're newly ready...
                         if(newReady == 1) {
-                            controller.setReady(playerNumber);
-                        } else { controller.setNotReady(playerNumber); }
+                            controller.setReady(opponentNumber);
+                        } else { controller.setNotReady(opponentNumber); }
                     }
                     ready = newReady;
                 } catch(Exception ex) {ex.printStackTrace(); }

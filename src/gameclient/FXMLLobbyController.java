@@ -92,11 +92,9 @@ public class FXMLLobbyController implements Initializable {
     public void setNotReady(int playerNumber) {
         if(playerNumber == 1) {
             p1Ready = 0;
-            player1Ready.setText("Ready");
             player1Color.setFill(Color.WHITE);
         } else {
             p2Ready = 0;
-            player2Ready.setText("Ready");
             player2Color.setFill(Color.WHITE);
         }
     }
@@ -104,11 +102,9 @@ public class FXMLLobbyController implements Initializable {
     public void setReady(int playerNumber) {
         if(playerNumber == 1) {
             p1Ready = 1;
-            player1Ready.setText("Unready");
             player1Color.setFill(Color.BLUE);
         } else {
             p2Ready = 1;
-            player2Ready.setText("Unready");
             player2Color.setFill(Color.RED);
         }
     }
