@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
 import physics.*;
 
@@ -15,6 +16,7 @@ public class Simulation {
     private DiamondDisplay player2;
     private Lock lock;
     private GameGateway gateway;
+    private Label scoreBox;
     
     public Simulation(int width,int height,int dX,int dY)
     {
@@ -24,6 +26,7 @@ public class Simulation {
         player1 = new DiamondDisplay(width - 60,height - 40, 20);
         player2 = new DiamondDisplay(60, 40, 20);
         lock = new ReentrantLock();
+        scoreBox = new Label("P1: 0     P2: 0");
     }
     
     public GameGateway getGateway(){ return gateway; }
@@ -58,6 +61,7 @@ public class Simulation {
         newShapes.add(player1.getShape());
         newShapes.add(ball.getShape());
         newShapes.add(player2.getShape());
+        newShapes.add(scoreBox.getShape());
         return newShapes;
     }
     
