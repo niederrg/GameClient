@@ -46,39 +46,39 @@ public class FXMLLobbyController implements Initializable {
     private Boolean p1Ready = false;
     private Boolean p2Ready = false;
     
-    @FXML
-    private void setP1Ready() {
-        if(p1Ready) {
-            p1Ready = false;
-            player1Ready.setText("Ready");
-            player1Color.setFill(Color.WHITE);
-        } else {
-            p1Ready = true;
-            player1Ready.setText("Unready");
-            player1Color.setFill(Color.BLUE);
-        }
-        if(p1Ready && p2Ready) {
-            startGame();
-        }
-        
-    }
-    
-    @FXML
-    private void setP2Ready() {
-        if(p2Ready) {
-            p2Ready = false;
-            player2Ready.setText("Ready");
-            player2Color.setFill(Color.WHITE);
-        } else {
-            p2Ready = true;
-            player2Ready.setText("Unready");
-            player2Color.setFill(Color.RED);
-        }
-        
-        if(p1Ready && p2Ready) {
-            startGame();
-        }
-    }
+//    @FXML
+//    private void setP1Ready() {
+//        if(p1Ready) {
+//            p1Ready = false;
+//            player1Ready.setText("Ready");
+//            player1Color.setFill(Color.WHITE);
+//        } else {
+//            p1Ready = true;
+//            player1Ready.setText("Unready");
+//            player1Color.setFill(Color.BLUE);
+//        }
+//        if(p1Ready && p2Ready) {
+//            startGame();
+//        }
+//        
+//    }
+//    
+//    @FXML
+//    private void setP2Ready() {
+//        if(p2Ready) {
+//            p2Ready = false;
+//            player2Ready.setText("Ready");
+//            player2Color.setFill(Color.WHITE);
+//        } else {
+//            p2Ready = true;
+//            player2Ready.setText("Unready");
+//            player2Color.setFill(Color.RED);
+//        }
+//        
+//        if(p1Ready && p2Ready) {
+//            startGame();
+//        }
+//    }
     
     
     @Override

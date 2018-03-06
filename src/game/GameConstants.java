@@ -8,4 +8,6 @@ public interface GameConstants {
     public static int EVOLVE = 4;
     public static int GET_POINTS = 5;
     public static int GET_CLIENT_NUM = 6;
+    public static int GET_NAME = 7;
+    public static int SEND_NAME = 8;
 }

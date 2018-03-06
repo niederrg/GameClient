@@ -65,6 +65,27 @@ public class GameGateway implements game.GameConstants {
         return X;
     }
     
+    public void sendName(String name) {
+        outputToServer.println(SEND_NAME);
+        outputToServer.println(name);
+        outputToServer.flush();
+    }
+    
+    public String getName() {
+        outputToServer.println(GET_NAME);
+        outputToServer.flush();
+        String name = null;
+        try {
+            name = inputFromServer.readLine();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if(name.isEmpty() == false) {
+            return name;
+        }
+        return null;
+    }
+    
     public void evolve(double time){
         outputToServer.println(EVOLVE);
         outputToServer.println(time);
