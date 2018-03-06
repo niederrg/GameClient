@@ -85,8 +85,8 @@ public class GameClient extends Application {
         primaryStage.setOnCloseRequest((event)->System.exit(0));
         primaryStage.show();
         
-        new Thread(new CheckPositions(sim));
-        new Thread(new CheckScore(sim));
+        new Thread(new CheckPositions(sim)).start();
+        new Thread(new CheckScore(sim)).start();
         // This is the main animation thread
         
         new Thread(() -> {
