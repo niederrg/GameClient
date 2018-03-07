@@ -10,8 +10,8 @@ import javafx.scene.shape.Shape;
 import physics.*;
 
 public class Simulation {
-    private Box outer;
-    private Ball ball;
+    private BoxDisplay outer;
+    private BallDisplay ball;
     private DiamondDisplay player1;
     private DiamondDisplay player2;
     private Lock lock;
@@ -21,8 +21,8 @@ public class Simulation {
     public Simulation(int width,int height,int dX,int dY)
     {
         gateway = new GameGateway();
-        outer = new Box(0,0,width,height,false);
-        ball = new Ball(width/2,height/2,dX,dY);
+        outer = new BoxDisplay(0, 0, width, height);
+        ball = new BallDisplay(width/2,height/2);
         player1 = new DiamondDisplay(width - 60,height - 40, 20);
         player2 = new DiamondDisplay(60, 40, 20);
         lock = new ReentrantLock();
@@ -59,7 +59,7 @@ public class Simulation {
         ArrayList<Shape> newShapes = new ArrayList<Shape>();
         newShapes.add(outer.getShape());
         newShapes.add(player1.getShape());
-        newShapes.add(ball.getShape());
+        newShapes.add(ball.getShape(gateway));
         newShapes.add(player2.getShape());
         newShapes.add(scoreBox.getShape());
         return newShapes;
@@ -74,6 +74,6 @@ public class Simulation {
         pointsP2 = gateway.getPoints(true);
         player2.updateShape(pointsP2);
         player1.updateShape(pointsP1);
-        ball.updateShape();
+        ball.updateShape(gateway);
     }
 }
