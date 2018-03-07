@@ -18,9 +18,9 @@ public class Simulation {
     private GameGateway gateway;
     private Label scoreBox;
     
-    public Simulation(int width,int height,int dX,int dY)
+    public Simulation(int width,int height,int dX,int dY, GameGateway gateway)
     {
-        gateway = new GameGateway();
+        this.gateway = gateway;
         outer = new BoxDisplay(0, 0, width, height);
         ball = new BallDisplay(width/2,height/2);
         player1 = new DiamondDisplay(width - 60,height - 40, 20);

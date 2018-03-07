@@ -86,7 +86,7 @@ public class GameClient extends Application {
     
     public void startGame(Stage primaryStage){
         GamePane root = new GamePane();
-        Simulation sim = new Simulation(300, 250, 2, 2);
+        Simulation sim = new Simulation(300, 250, 2, 2, gateway);
         int speed = 10;
         
         Scene scene = new Scene(root, 300, 250);
