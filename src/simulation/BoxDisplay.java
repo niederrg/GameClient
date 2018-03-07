@@ -15,7 +15,7 @@ public class BoxDisplay {
     public int height;
     
     // Set outward to true if you want a box with outward pointed normals
-    public BoxDisplay(int x,int y,int width,int height,boolean outward)
+    public BoxDisplay(int x,int y,int width,int height)
     {
         this.x = x;
         this.y = y;
