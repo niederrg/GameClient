@@ -52,19 +52,7 @@ public class GameGateway implements game.GameConstants {
         return points;
     }
     
-    public int getX(boolean opponent){
-        outputToServer.println(GET_X);
-        outputToServer.println(opponent);
-        outputToServer.flush();
-        int X = 0;
-        try {
-            X = Integer.parseInt(inputFromServer.readLine());
-        } catch (IOException ex) {
-            //Platform.runLater(() -> textArea.appendText("Error in getCommentCount: " + ex.toString() + "\n"));
-            ex.printStackTrace();
-        }
-        return X;
-    }
+    
     
     public void sendReady(int b) {
         outputToServer.println(SEND_READY);
@@ -88,20 +76,6 @@ public class GameGateway implements game.GameConstants {
         outputToServer.println(EVOLVE);
         outputToServer.println(time);
         outputToServer.flush();
-    }
-    
-     public int getY(boolean opponent){
-        outputToServer.println(GET_Y);
-        outputToServer.println(opponent);
-        outputToServer.flush();
-        int Y = 0;
-        try {
-            Y = Integer.parseInt(inputFromServer.readLine());
-        } catch (IOException ex) {
-            //Platform.runLater(() -> textArea.appendText("Error in getCommentCount: " + ex.toString() + "\n"));
-            ex.printStackTrace();
-        }
-        return Y;
     }
      
     public int getClientNumber(){
