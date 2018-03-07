@@ -83,7 +83,7 @@ public class Box {
     
     public void updateShape(GameGateway gateway, boolean opponent)
     {
-        r.setX(gateway.getX(opponent));
-        r.setY(gateway.getY(opponent));
+//        r.setX(gateway.getX(opponent));
+//        r.setY(gateway.getY(opponent));
     }
 }
