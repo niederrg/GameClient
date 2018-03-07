@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import physics.*;
 
 public class Simulation {
@@ -23,10 +25,10 @@ public class Simulation {
         this.gateway = gateway;
         outer = new BoxDisplay(0, 0, width, height);
         ball = new BallDisplay(width/2,height/2);
-        player1 = new DiamondDisplay(width - 60,height - 40, 20);
+        player1 = new DiamondDisplay(width - 100,height - 70, 20);
         player2 = new DiamondDisplay(60, 40, 20);
-        lock = new ReentrantLock();
         scoreBox = new Label("P1: 0     P2: 0");
+        lock = new ReentrantLock();
     }
     
     public GameGateway getGateway(){ return gateway; }
@@ -38,8 +40,16 @@ public class Simulation {
         newShapes.add(player1.getShape());
         newShapes.add(ball.getShape(gateway.getBallX(),gateway.getBallY()));
         newShapes.add(player2.getShape());
-        //newShapes.add(scoreBox.getShape());
+        //newShapes.add(scoreBox.getClip());
         return newShapes;
+    }
+    
+    public Label getScoreBox(){
+        return scoreBox;
+    }
+    
+    public void setScoreBox(String newLabel){
+        scoreBox.setText(newLabel);
     }
     
     public void updateShapes()

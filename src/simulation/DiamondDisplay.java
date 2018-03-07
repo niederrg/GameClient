@@ -29,7 +29,7 @@ public class DiamondDisplay
         right = new Point(x+(2*r), y+r);
         left = new Point(x, y+r);
         bottom = new Point(x+r, y+(2*r));
-        
+        diamond = new Polygon(top.x, top.y, right.x, right.y, bottom.x, bottom.y, left.x, left.y);
     }
     
     

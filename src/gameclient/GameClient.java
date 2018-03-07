@@ -112,13 +112,14 @@ public class GameClient extends Application {
         primaryStage.setTitle("Game Physics");
        // root.getChildren().clear();
         root.getChildren().addAll(sim.setUpShapes());
+        root.getChildren().add(sim.getScoreBox());
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest((event)->System.exit(0));
         primaryStage.show();
         });
         
-//        new Thread(new CheckPositions(sim)).start();
-//        new Thread(new CheckScore(sim)).start();
+        new Thread(new CheckPositions(sim,root)).start();
+        new Thread(new CheckScore(sim,gateway)).start();
 
         
 //        new Thread(() -> {
@@ -144,11 +145,13 @@ class CheckScore implements Runnable {
     private int p1score;
     private int p2score;
     private GameGateway gateway;
+    private Simulation sim;
     
-    public CheckScore(Simulation sim){
+    public CheckScore(Simulation sim, GameGateway gateway){
         p1score = 0;
         p2score = 0;
-        gateway = sim.getGateway();
+        this.gateway = gateway;
+        this.sim=sim;
     }
     
     public void run(){
@@ -161,7 +164,9 @@ class CheckScore implements Runnable {
             } else if (p2score >= 10){
                 gateway.endGame(2); // PUT OTHER END GAME CODE HERE
             } 
-            //SEND THESE NUMBERS TO WHEREVER WE ARE SHOWING THEM SOMEHOW HERE!
+            Platform.runLater(()->{
+                sim.setScoreBox("P1: " + p1score + "      P2: " + p2score);
+            });
             try {
                 Thread.sleep(250);
             } catch (Exception ex) { ex.printStackTrace(); }
@@ -171,14 +176,21 @@ class CheckScore implements Runnable {
 
 class CheckPositions implements Runnable,game.GameConstants{
     private Simulation sim;
+    private GamePane root;
     
-    public CheckPositions(Simulation sim){
+    public CheckPositions(Simulation sim, GamePane root){
         this.sim=sim;
+        this.root = root;
     }
     
     public void run(){
         while(true){
             sim.updateShapes();
+            Platform.runLater(()->{
+                root.getChildren().clear();
+                root.getChildren().addAll(sim.setUpShapes());
+                root.getChildren().add(sim.getScoreBox());
+            });
             try{
                 Thread.sleep(250);
             }catch (Exception ex) { ex.printStackTrace(); }
