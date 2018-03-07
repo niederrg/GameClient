@@ -7,6 +7,7 @@ package gameclient;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -45,8 +46,7 @@ public class FXMLLobbyController implements Initializable {
     
     public void setPlayerNumber(int i) {
         playerNumber = i;
-    }
-    
+    }    
     
     
     public void hideReady(int i) {
@@ -120,7 +120,7 @@ public class FXMLLobbyController implements Initializable {
             //TODO
     }
     
-    private void startGame(){
-        
+    public void quit() {
+        Platform.exit();
     }
 }
