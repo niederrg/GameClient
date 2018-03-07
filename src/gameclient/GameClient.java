@@ -160,7 +160,7 @@ class CheckScore implements Runnable {
             //SEND THESE NUMBERS TO WHEREVER WE ARE SHOWING THEM SOMEHOW HERE!
             try {
                 Thread.sleep(250);
-            } catch (Exception ex) {}
+            } catch (Exception ex) { ex.printStackTrace(); }
         }
     }
 }
@@ -177,7 +177,7 @@ class CheckPositions implements Runnable,game.GameConstants{
             sim.updateShapes();
             try{
                 Thread.sleep(250);
-            }catch (Exception ex) {}
+            }catch (Exception ex) { ex.printStackTrace(); }
         }
     }
 }

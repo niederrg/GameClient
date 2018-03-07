@@ -47,7 +47,7 @@ public class GameGateway implements game.GameConstants {
                 double y = Double.parseDouble(inputFromServer.readLine());
                 points.add(new Point(x,y));
             }
-        } catch(Exception ex) {}
+        } catch(Exception ex) { ex.printStackTrace(); }
         
         return points;
     }
