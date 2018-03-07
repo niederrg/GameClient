@@ -30,10 +30,4 @@ public class BoxDisplay {
         r.setStroke(Color.BLACK);
         return r;
     }
-    
-    public void updateShape(GameGateway gateway, int playerNumber)
-    {
-        r.setX(gateway.getX(playerNumber));
-        r.setY(gateway.getY(playerNumber));
-    }
 }
