@@ -113,6 +113,18 @@ public class GameGateway implements game.GameConstants {
         return 0;
     }
     
+    public Boolean getGameSignal() {
+        outputToServer.println(START_GAME_SIGNAL);
+        outputToServer.flush();
+        try {
+            int ready = Integer.parseInt(inputFromServer.readLine());
+            if(ready == 1) {
+                return true;
+            }
+        } catch(Exception ex) { ex.printStackTrace(); }
+        return false;
+    }
+    
     public int getScore(int playerNum){
         outputToServer.println(GET_SCORE);
         outputToServer.println(playerNum);
