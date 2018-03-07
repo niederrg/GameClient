@@ -45,8 +45,8 @@ public class GameClient extends Application {
         
         System.out.println("My number is: " + playerNumber + "\nMy opponent's number is: " + opponentNumber);
         new Thread(() -> {
-            int ready = 0;
-            while(true) {
+//            int ready = 0;
+//            while(true) {
                 
 //                try {
 //                    int newReady = gateway.getReady();                    
@@ -60,17 +60,23 @@ public class GameClient extends Application {
 //                    }
 //                    ready = newReady;
 //                } catch(Exception ex) {ex.printStackTrace(); }
+//            }
+            try {
+                int opponentReady = 0;
+                while(opponentReady == 0) {
+                    opponentReady = gateway.getReady();
 
-                try {
-                    int opponentReady = 0;
-                    while(opponentReady == 0) {
-                        opponentReady = gateway.getReady();
-                        
-                        Thread.sleep(250);
-                    }
-                    controller.setReady(opponentNumber);
-                } catch (Exception ex) { ex.printStackTrace(); }
-            }
+                    Thread.sleep(250);
+                }
+                controller.setReady(opponentNumber);
+                Thread.sleep(3000);
+
+                while(gameStarted == false) {
+                    gameStarted = gateway.getGameSignal();
+                    Thread.sleep(250);
+                }
+                System.out.println("game start");
+            } catch (Exception ex) { ex.printStackTrace(); }
         }).start();
     }
      
@@ -79,21 +85,22 @@ public class GameClient extends Application {
         GamePane root = new GamePane();
         Simulation sim = new Simulation(300, 250, 2, 2);
         root.setShapes(sim.setUpShapes());
+        int speed = 10;
         
         Scene scene = new Scene(root, 300, 250);
         root.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case DOWN:
-                    sim.moveInner(0, 3);
+                    sim.moveInner(0, speed);
                     break;
                 case UP:
-                    sim.moveInner(0, -3);
+                    sim.moveInner(0, -1 * speed);
                     break;
                 case LEFT:
-                    sim.moveInner(-3, 0);
+                    sim.moveInner(-1 * speed, 0);
                     break;
                 case RIGHT:
-                    sim.moveInner(3, 0);
+                    sim.moveInner(speed, 0);
                     break;
             }
         });
