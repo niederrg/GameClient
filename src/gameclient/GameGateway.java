@@ -109,7 +109,7 @@ public class GameGateway implements game.GameConstants {
         outputToServer.flush();
         try {
             return Integer.parseInt(inputFromServer.readLine());
-        } catch (Exception ex) {}
+        } catch (Exception ex) { ex.printStackTrace(); }
         return 0;
     }
     
@@ -125,13 +125,33 @@ public class GameGateway implements game.GameConstants {
         return false;
     }
     
+    public double getBallX() {
+        outputToServer.println(GET_BALL_X);
+        outputToServer.flush();
+        
+        try{
+            return Double.parseDouble(inputFromServer.readLine());
+        } catch(Exception ex) { ex.printStackTrace(); }
+        return 0;
+    }
+    
+    public double getBallY() {
+        outputToServer.println(GET_BALL_Y);
+        outputToServer.flush();
+        
+        try{
+            return Double.parseDouble(inputFromServer.readLine());
+        } catch(Exception ex) { ex.printStackTrace(); }
+        return 0;
+    }
+    
     public int getScore(int playerNum){
         outputToServer.println(GET_SCORE);
         outputToServer.println(playerNum);
         outputToServer.flush();
         try{
             return Integer.parseInt(inputFromServer.readLine());
-        }catch (Exception ex) {}
+        }catch (Exception ex) { ex.printStackTrace(); }
         return 0;
     }
     
