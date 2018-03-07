@@ -75,8 +75,10 @@ public class GameClient extends Application {
                     gameStarted = gateway.getGameSignal();
                     Thread.sleep(250);
                 }
-                Platform.runLater(()-> {controller.quit();});
-                startGame(primaryStage);
+                Platform.runLater(()-> {
+                    controller.quit();
+                    startGame(primaryStage);
+                });            
             } catch (Exception ex) { ex.printStackTrace(); }
         }).start();
     }
