@@ -29,9 +29,9 @@ public class GameGateway implements game.GameConstants {
         } 
     }
     
-    public ArrayList<Point> getPoints(boolean opponent){
+    public ArrayList<Point> getPoints(int playerNum){
         outputToServer.println(GET_POINTS);
-        outputToServer.println(opponent);
+        outputToServer.println(playerNum);
         outputToServer.flush();
         ArrayList<Point> points = new ArrayList<>();
         try{

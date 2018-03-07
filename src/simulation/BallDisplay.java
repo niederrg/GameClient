@@ -13,9 +13,9 @@ public class BallDisplay {
         
     }
     
-    public Shape getShape(GameGateway gateway)
+    public Shape getShape(double x, double y)
     {
-        c = new Circle(gateway.getBallX(), gateway.getBallY(), 4);
+        c = new Circle(x, y, 4);
         c.setFill(Color.RED);
         return c;
     }

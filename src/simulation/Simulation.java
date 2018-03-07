@@ -36,9 +36,9 @@ public class Simulation {
         ArrayList<Shape> newShapes = new ArrayList<Shape>();
         newShapes.add(outer.getShape());
         newShapes.add(player1.getShape());
-        newShapes.add(ball.getShape(gateway));
+        newShapes.add(ball.getShape(gateway.getBallX(),gateway.getBallY()));
         newShapes.add(player2.getShape());
-        newShapes.add(scoreBox.getShape());
+        //newShapes.add(scoreBox.getShape());
         return newShapes;
     }
     
@@ -47,8 +47,8 @@ public class Simulation {
         ArrayList<Point> pointsP1;
         ArrayList<Point> pointsP2;
         //getPoints
-        pointsP1 = gateway.getPoints(false);
-        pointsP2 = gateway.getPoints(true);
+        pointsP1 = gateway.getPoints(1);
+        pointsP2 = gateway.getPoints(2);
         player2.updateShape(pointsP2);
         player1.updateShape(pointsP1);
         ball.updateShape(gateway);
