@@ -124,7 +124,7 @@ public class GameGateway implements game.GameConstants {
         outputToServer.println(playerNum);
         outputToServer.flush();
         try{
-            return Integer.parseInt(inputFromServer.readLine());
+            return (int)Double.parseDouble(inputFromServer.readLine());
         }catch (Exception ex) { ex.printStackTrace(); }
         return 0;
     }
