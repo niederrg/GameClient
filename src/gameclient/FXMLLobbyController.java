@@ -121,6 +121,6 @@ public class FXMLLobbyController implements Initializable {
     }
     
     public void quit() {
-        Platform.exit();
+        lobbyLabel.getScene().getWindow().hide();
     }
 }

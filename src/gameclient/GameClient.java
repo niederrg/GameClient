@@ -75,7 +75,7 @@ public class GameClient extends Application {
                     gameStarted = gateway.getGameSignal();
                     Thread.sleep(250);
                 }
-                controller.quit();
+                Platform.runLater(()-> {controller.quit();});
                 startGame(primaryStage);
             } catch (Exception ex) { ex.printStackTrace(); }
         }).start();
@@ -104,12 +104,14 @@ public class GameClient extends Application {
                     break;
             }
         });
-        root.requestFocus(); 
-
+        root.requestFocus();    
+        
+        Platform.runLater(()->{
         primaryStage.setTitle("Game Physics");
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest((event)->System.exit(0));
         primaryStage.show();
+        });
         
         new Thread(new CheckPositions(sim)).start();
         new Thread(new CheckScore(sim)).start();
