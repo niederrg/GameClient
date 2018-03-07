@@ -31,29 +31,6 @@ public class Simulation {
     
     public GameGateway getGateway(){ return gateway; }
     
-    public void evolve(double time)
-    {
-        gateway.evolve(time);
-//        lock.lock();
-//        Ray newLoc = player1.bounceRay(ball.getRay(), time);
-//        if(newLoc != null)
-//            ball.setRay(newLoc);
-//        else {
-//            newLoc = outer.bounceRay(ball.getRay(), time);
-//            if(newLoc != null)
-//                ball.setRay(newLoc);
-//            else
-//                ball.move(time);
-//        } 
-//        lock.unlock();
-    }
-    
-    public void moveInner(int deltaX,int deltaY)
-    {
-        gateway.sendMovement(deltaX, deltaY);
-        lock.unlock();
-    }
-    
     public List<Shape> setUpShapes()
     {
         ArrayList<Shape> newShapes = new ArrayList<Shape>();

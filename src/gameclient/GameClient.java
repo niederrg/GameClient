@@ -93,16 +93,16 @@ public class GameClient extends Application {
         root.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case DOWN:
-                    sim.moveInner(0, speed);
+                    gateway.sendMovement("down");
                     break;
                 case UP:
-                    sim.moveInner(0, -1 * speed);
+                    gateway.sendMovement("up");
                     break;
                 case LEFT:
-                    sim.moveInner(-1 * speed, 0);
+                    gateway.sendMovement("left");
                     break;
                 case RIGHT:
-                    sim.moveInner(speed, 0);
+                    gateway.sendMovement("right");
                     break;
             }
         });
@@ -115,21 +115,21 @@ public class GameClient extends Application {
         primaryStage.show();
         });
         
-        new Thread(new CheckPositions(sim)).start();
-        new Thread(new CheckScore(sim)).start();
-        // This is the main animation thread
-        
-        new Thread(() -> {
-            while (true) {
-                sim.evolve(1.0);
-                Platform.runLater(()->sim.updateShapes());
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException ex) {
+//        new Thread(new CheckPositions(sim)).start();
+//        new Thread(new CheckScore(sim)).start();
 
-                }
-            }
-        }).start();
+        
+//        new Thread(() -> {
+//            while (true) {
+//                sim.evolve(1.0);
+//                Platform.runLater(()->sim.updateShapes());
+//                try {
+//                    Thread.sleep(50);
+//                } catch (InterruptedException ex) {
+//
+//                }
+//            }
+//        }).start();
     }
     
     public static void main(String[] args) {

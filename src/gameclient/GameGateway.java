@@ -29,13 +29,6 @@ public class GameGateway implements game.GameConstants {
         } 
     }
     
-    public void sendMovement(int dX,int dY){
-        outputToServer.println(SEND_DXDY);
-        outputToServer.println(dX);
-        outputToServer.println(dY);
-        outputToServer.flush();
-    }
-    
     public ArrayList<Point> getPoints(boolean opponent){
         outputToServer.println(GET_POINTS);
         outputToServer.println(opponent);
@@ -52,7 +45,11 @@ public class GameGateway implements game.GameConstants {
         return points;
     }
     
-    
+    public void sendMovement(String direction) {
+        outputToServer.println(SEND_MOVEMENT);
+        outputToServer.println(direction);
+        outputToServer.flush();
+    }
     
     public void sendReady(int b) {
         outputToServer.println(SEND_READY);
@@ -72,12 +69,6 @@ public class GameGateway implements game.GameConstants {
         return ready;
     }
     
-    public void evolve(double time){
-        outputToServer.println(EVOLVE);
-        outputToServer.println(time);
-        outputToServer.flush();
-    }
-     
     public int getClientNumber(){
         outputToServer.println(GET_CLIENT_NUM);
         outputToServer.flush();
