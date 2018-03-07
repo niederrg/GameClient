@@ -75,7 +75,8 @@ public class GameClient extends Application {
                     gameStarted = gateway.getGameSignal();
                     Thread.sleep(250);
                 }
-                System.out.println("game start");
+                controller.quit();
+                startGame(primaryStage);
             } catch (Exception ex) { ex.printStackTrace(); }
         }).start();
     }
@@ -84,7 +85,6 @@ public class GameClient extends Application {
     public void startGame(Stage primaryStage){
         GamePane root = new GamePane();
         Simulation sim = new Simulation(300, 250, 2, 2);
-        root.setShapes(sim.setUpShapes());
         int speed = 10;
         
         Scene scene = new Scene(root, 300, 250);
