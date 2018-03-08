@@ -11,7 +11,7 @@ public class BallDisplay {
     
     public BallDisplay(int startX,int startY) {
         c = new Circle(startX, startY,4);
-        c.setFill(Color.RED);
+        c.setFill(Color.GREEN);
     }
     
     public Shape getShape(double x, double y)
