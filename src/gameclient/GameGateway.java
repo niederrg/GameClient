@@ -29,7 +29,7 @@ public class GameGateway implements game.GameConstants {
         } 
     }
     
-    public ArrayList<Point> getPoints(int playerNum){
+    public synchronized ArrayList<Point> getPoints(int playerNum){
         outputToServer.println(GET_POINTS);
         outputToServer.println(playerNum);
         outputToServer.flush();
@@ -45,19 +45,19 @@ public class GameGateway implements game.GameConstants {
         return points;
     }
     
-    public void sendMovement(String direction) {
+    public synchronized void sendMovement(String direction) {
         outputToServer.println(SEND_MOVEMENT);
         outputToServer.println(direction);
         outputToServer.flush();
     }
     
-    public void sendReady(int b) {
+    public synchronized void sendReady(int b) {
         outputToServer.println(SEND_READY);
         outputToServer.println(b);
         outputToServer.flush();
     }
     
-    public int getReady() {
+    public synchronized int getReady() {
         outputToServer.println(GET_READY);
         outputToServer.flush();
         
@@ -69,7 +69,7 @@ public class GameGateway implements game.GameConstants {
         return ready;
     }
     
-    public int getClientNumber(){
+    public synchronized int getClientNumber(){
         outputToServer.println(GET_CLIENT_NUM);
         outputToServer.flush();
         try {
@@ -78,7 +78,7 @@ public class GameGateway implements game.GameConstants {
         return 0;
     }
     
-    public Boolean getGameSignal() {
+    public synchronized Boolean getGameSignal() {
         outputToServer.println(START_GAME_SIGNAL);
         outputToServer.flush();
         try {
@@ -90,7 +90,7 @@ public class GameGateway implements game.GameConstants {
         return false;
     }
     
-    public double getBallX() {
+    public synchronized double getBallX() {
         outputToServer.println(GET_BALL_X);
         outputToServer.flush();
         
@@ -100,7 +100,7 @@ public class GameGateway implements game.GameConstants {
         return 0;
     }
     
-    public double getBallY() {
+    public synchronized double getBallY() {
         outputToServer.println(GET_BALL_Y);
         outputToServer.flush();
         
@@ -110,7 +110,7 @@ public class GameGateway implements game.GameConstants {
         return 0;
     }
     
-    public int getScore(int playerNum){
+    public synchronized int getScore(int playerNum){
         outputToServer.println(GET_SCORE);
         outputToServer.println(playerNum);
         outputToServer.flush();
@@ -120,7 +120,7 @@ public class GameGateway implements game.GameConstants {
         return 0;
     }
     
-    public void endGame(int winner){
+    public synchronized void endGame(int winner){
         outputToServer.println(END_GAME);
         outputToServer.println(winner);
         outputToServer.flush();
